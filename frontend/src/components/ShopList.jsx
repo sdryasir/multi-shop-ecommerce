@@ -1,7 +1,12 @@
 import React from 'react'
 import ShopSidebar from './ShopSidebar'
 
+import { useGetAllProductsQuery } from '../redux/features/product/productApi'
+
 function ShopList() {
+
+    const {isLoading, data, error} = useGetAllProductsQuery()
+
   return (
     <>
     <div className="container-fluid">

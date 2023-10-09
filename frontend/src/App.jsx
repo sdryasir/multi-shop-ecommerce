@@ -10,8 +10,8 @@ function App() {
 
   return (
     <>
-      <Home/>
-      {/* <Shop/> */}
+      {/* <Home/> */}
+      <Shop/>
       {/* <Detail/> */}
       {/* <Cart/> */}
       {/* <Checkout/> */}
