@@ -1,4 +1,5 @@
 import './App.css'
+import AddProduct from './pages/AddProduct'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Contact from './pages/Contact'
@@ -11,11 +12,12 @@ function App() {
   return (
     <>
       {/* <Home/> */}
-      <Shop/>
+      {/* <Shop/> */}
       {/* <Detail/> */}
       {/* <Cart/> */}
       {/* <Checkout/> */}
       {/* <Contact/> */}
+      <AddProduct/>
     </>
   )
 }

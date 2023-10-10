@@ -24,6 +24,7 @@ export const getProductById = async function(req, res, next){
 
 export const createNewProduct = async function(req, res, next){
     const newProduct = req.body;
+    console.log(newProduct);
     try {
         const r = await Product.create(newProduct)
         res.json({
