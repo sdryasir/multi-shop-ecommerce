@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const productApi = createApi({
   reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/' }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: 'http://localhost:8000/api/',
+    mode:'cors' 
+  }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => `/products`,
@@ -11,9 +14,6 @@ export const productApi = createApi({
       query: (data) => ({
         url: `/new/product`,
         method: 'POST',
-        headers: {
-          'Accept': 'application/json'
-        },
         body: data,
       })
   }),

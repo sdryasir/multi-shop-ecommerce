@@ -1,4 +1,5 @@
 import Product from '../models/productSchema.js'
+import * as cloudinary from 'cloudinary'
 
 export const getAllProducts = async function(req, res, next){
 
@@ -25,6 +26,19 @@ export const getProductById = async function(req, res, next){
 export const createNewProduct = async function(req, res, next){
     const newProduct = req.body;
     console.log(newProduct);
+
+
+    await cloudinary.v2.uploader.upload(newProduct.image, {folder:'multishop ecommerce'}, (error, result)=>{
+        let secure_url = result.secure_url;
+        let public_id = result.public_id;
+        let img = {
+            secure_url,
+            public_id
+        }
+        newProduct.image = [img]
+        console.log(newProduct);
+    })
+
     try {
         const r = await Product.create(newProduct)
         res.json({

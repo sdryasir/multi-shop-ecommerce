@@ -13,6 +13,9 @@ const productSchema = new Schema({
     description:{
         type:String
     },
+    category:{
+        type:String,
+    },
     price:{
         type:Number,
         required:[true, 'Please provide the price'],
@@ -25,7 +28,7 @@ const productSchema = new Schema({
         min:[0, 'minimum discount should be 0'],
         max:[80, 'maximum discount should 80']
     },
-    image:[{url:String, size:{type:Number}}],
+    image:[{secure_url:String, public_id:String}],
     rating:{
         count:{type:Number},
         rating:{
