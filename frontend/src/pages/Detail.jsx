@@ -1,14 +1,9 @@
 import React from 'react'
-import Topbar from '../components/Topbar'
-import Navbar from '../components/Navbar'
 import Breadcrumb from '../components/Breadcrumb'
-import Footer from '../components/Footer'
 
 function Detail() {
   return (
     <>
-        <Topbar/>
-        <Navbar/>
         <Breadcrumb/>
         <div className="container-fluid pb-5">
         <div className="row px-xl-5">
@@ -227,7 +222,6 @@ function Detail() {
             </div>
         </div>
     </div>        
-        <Footer/>
     </>
   )
 }

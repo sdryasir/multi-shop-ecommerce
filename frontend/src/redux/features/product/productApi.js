@@ -4,7 +4,6 @@ export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({ 
     baseUrl: 'http://localhost:8000/api/',
-    mode:'cors' 
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({

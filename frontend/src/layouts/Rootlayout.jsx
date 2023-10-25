@@ -1,17 +1,18 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Topbar from '../components/Topbar'
 import Navbar from '../components/Navbar'
-import Breadcrumb from '../components/Breadcrumb'
-import ShopList from '../components/ShopList'
 import Footer from '../components/Footer'
 
-function Shop() {
+function RootLayout() {
   return (
     <>
-        <Breadcrumb/>
-        <ShopList/>
+        <Topbar/>
+        <Navbar/>
+            <Outlet/>
+        <Footer/>
     </>
   )
 }
 
-export default Shop
+export default RootLayout

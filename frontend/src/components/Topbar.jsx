@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Topbar() {
   return (
@@ -18,24 +19,8 @@ function Topbar() {
                     <div className="btn-group">
                         <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div className="dropdown-menu dropdown-menu-right">
-                            <button className="dropdown-item" type="button">Sign in</button>
-                            <button className="dropdown-item" type="button">Sign up</button>
-                        </div>
-                    </div>
-                    <div className="btn-group mx-2">
-                        <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <button className="dropdown-item" type="button">EUR</button>
-                            <button className="dropdown-item" type="button">GBP</button>
-                            <button className="dropdown-item" type="button">CAD</button>
-                        </div>
-                    </div>
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <button className="dropdown-item" type="button">FR</button>
-                            <button className="dropdown-item" type="button">AR</button>
-                            <button className="dropdown-item" type="button">RU</button>
+                            <Link className="dropdown-item" to="/auth/login">Sign in</Link>
+                            <Link className="dropdown-item" to="/auth/register">Sign up</Link>
                         </div>
                     </div>
                 </div>
@@ -53,10 +38,10 @@ function Topbar() {
         </div>
         <div className="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div className="col-lg-4">
-                <a href="" className="text-decoration-none">
+                <Link to="/" className="text-decoration-none">
                     <span className="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
                     <span className="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
-                </a>
+                </Link>
             </div>
             <div className="col-lg-4 col-6 text-left">
                 <form action="">

@@ -1,14 +1,9 @@
 import React from 'react'
-import Topbar from '../components/Topbar'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import Breadcrumb from '../components/Breadcrumb'
 
 function Checkout() {
   return (
     <>
-    <Topbar/>
-    <Navbar/>
     <Breadcrumb/>
     <div className="container-fluid">
         <div className="row px-xl-5">
@@ -185,7 +180,6 @@ function Checkout() {
             </div>
         </div>
     </div>
-    <Footer/>
     </>
   )
 }

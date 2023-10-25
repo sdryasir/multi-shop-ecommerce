@@ -36,8 +36,6 @@ function AddProduct() {
     
   return (
     <>
-        <Topbar/>
-        <Navbar/>
         <Breadcrumb/>
 
         <div className="container-fluid">
@@ -102,8 +100,6 @@ function AddProduct() {
             </div>
         </div>
     </div>
-            
-        <Footer/>
     </>
   )
 }
