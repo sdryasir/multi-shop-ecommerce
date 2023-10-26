@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 const app = express();
 import prodctRoutes from './routes/productRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 import { connectDb, cloudinaryConfig } from './config/config.js';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 import 'dotenv/config'
@@ -12,7 +13,7 @@ cloudinaryConfig();
 
 app.use(bodyParser.json())
 app.use(cors());
-app.use('/api', prodctRoutes)
+app.use('/api', prodctRoutes, authRoutes)
 
 app.use(errorMiddleware)
 
