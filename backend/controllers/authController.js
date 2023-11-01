@@ -1,5 +1,7 @@
 import User from "../models/userSchema.js";
 import bcrypt from 'bcryptjs';
+import 'dotenv/config'
+import jwt from 'jsonwebtoken';
 
 export const registerNewUser = async (req, res, next)=>{
 
@@ -44,8 +46,10 @@ export const loginUser = async (req, res, next)=>{
         }
 
         //JWT
+        const token = await jwt.sign({ payload: user }, process.env.JWT_SECRET, { expiresIn: 1 * 60 * 60 });
 
-        res.json({
+
+        res.cookie("token", token, { expires: new Date(Date.now() + 900000), httpOnly: true, secure:true }).status(200).json({
             user
         })
 

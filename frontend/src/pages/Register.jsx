@@ -1,6 +1,38 @@
 import React from 'react'
+import { useFormik } from 'formik';
+ import * as Yup from 'yup';
+import { useRegisterUserMutation } from '../redux/features/auth/authApi';
 
 function Register() {
+
+
+    const [registerUser, {isLoading}] = useRegisterUserMutation();
+
+
+    const {handleSubmit, handleChange, handleBlur, errors, values, touched, setFieldValue} = useFormik({
+        initialValues: {
+          fullName: '',
+          userName: '',
+          email:'',
+          password: '',
+          cPassword:'',
+        },
+        validationSchema: Yup.object({
+            fullName: Yup.string().required('Required'),
+            userName: Yup.string().required('Required'),
+            email: Yup.string().required('Required'),
+            password: Yup.string().required('Required'),
+            cPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+        }),
+        onSubmit: async values => {
+            delete values.cPassword;
+            console.log(values);
+            await registerUser(values).unwrap();
+            // addProduct(values).unwrap();
+        },
+      });
+
+
   return (
     <div className="container-fluid">
         <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3">Create An Account</span></h2>
@@ -8,26 +40,31 @@ function Register() {
             <div className="col-lg-7 mb-5">
                 <div className="contact-form bg-light p-30">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" noValidate="novalidate">
+                    <form name="sentMessage" onSubmit={handleSubmit} id="contactForm" noValidate="novalidate">
                         <div className="control-group">
-                            <input type="text" onChange={()=>true} value={''} className="form-control" id="name" placeholder="Your Name"
+                            <input type="text" onChange={handleChange} onBlur={handleBlur} name='fullName' className="form-control" id="name" placeholder="Your Name"
                                 required="required" data-validation-required-message="Please enter your name" />
-                            <p className="help-block text-danger"></p>
+                            <p className="help-block text-danger">{errors.fullName && touched.fullName ? errors.fullName : null}</p>
                         </div>
                         <div className="control-group">
-                            <input type="email" onChange={()=>true} value={''} className="form-control" id="email" placeholder="Your Email"
+                            <input type="text" onChange={handleChange} onBlur={handleBlur} name='userName' className="form-control" id="name" placeholder="Your Username"
+                                required="required" data-validation-required-message="Please enter your name" />
+                            <p className="help-block text-danger">{errors.userName && touched.userName ? errors.userName : null}</p>
+                        </div>
+                        <div className="control-group">
+                            <input type="email" onChange={handleChange} onBlur={handleBlur} name='email' className="form-control" id="email" placeholder="Your Email"
                                 required="required" data-validation-required-message="Please enter your email" />
-                            <p className="help-block text-danger"></p>
+                            <p className="help-block text-danger">{errors.email && touched.email ? errors.email : null}</p>
                         </div>
                         <div className="control-group">
-                            <input type="text" onChange={()=>true} value={''} className="form-control" id="password" placeholder="password"
+                            <input type="password" onChange={handleChange} onBlur={handleBlur} name='password' className="form-control" id="password" placeholder="password"
                                 required="required" data-validation-required-message="Please enter a password" />
-                            <p className="help-block text-danger"></p>
+                            <p className="help-block text-danger">{errors.password && touched.password ? errors.password : null}</p>
                         </div>
                         <div className="control-group">
-                            <input type="text" onChange={()=>true} value={''} className="form-control" id="cpassword" placeholder="confirm password"
+                            <input type="password" onChange={handleChange} onBlur={handleBlur} name='cPassword' className="form-control" id="cpassword" placeholder="confirm password"
                                 required="required" data-validation-required-message="Please enter a password again" />
-                            <p className="help-block text-danger"></p>
+                            <p className="help-block text-danger">{errors.cPassword && touched.cPassword ? errors.cPassword : null}</p>
                         </div>
                         <div>
                             <button className="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Create Account</button>

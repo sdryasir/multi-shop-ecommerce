@@ -7,11 +7,13 @@ import { connectDb, cloudinaryConfig } from './config/config.js';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 import 'dotenv/config'
 import cors from 'cors'
-
+import cookieParser from 'cookie-parser'
 connectDb();
 cloudinaryConfig();
 
-app.use(bodyParser.json())
+
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(cors());
 app.use('/api', prodctRoutes, authRoutes)
 

@@ -8,7 +8,8 @@ const userSchema = new Schema({
     },
     userName:{
         type:String,
-        required:[true, 'Please provide the username']
+        required:[true, 'Please provide the username'],
+        unique:true
     },
     email:{
         type:String,
@@ -17,7 +18,8 @@ const userSchema = new Schema({
     },
     password:{
         type:String,
-        required:[true, 'Please provide the password']
+        required:[true, 'Please provide the password'],
+        trim: true,
     },
     avatar:{secure_url:String, public_id:String}
 })
