@@ -6,7 +6,7 @@ import { useRegisterUserMutation } from '../redux/features/auth/authApi';
 function Register() {
 
 
-    const [registerUser, {isLoading}] = useRegisterUserMutation();
+    const [registerUser, {isLoading, error, data}] = useRegisterUserMutation();
 
 
     const {handleSubmit, handleChange, handleBlur, errors, values, touched, setFieldValue} = useFormik({

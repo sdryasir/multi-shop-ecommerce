@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Topbar() {
+
+
+
   return (
     <>
     <div className="container-fluid">
@@ -22,6 +25,10 @@ function Topbar() {
                             <Link className="dropdown-item" to="/auth/login">Sign in</Link>
                             <Link className="dropdown-item" to="/auth/register">Sign up</Link>
                         </div>
+                        {/* <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Hi, sdr.yasir@gmail.com</button>
+                        <div className="dropdown-menu dropdown-menu-right">
+                            <Link className="dropdown-item" to="/auth/login">Logout</Link>
+                        </div> */}
                     </div>
                 </div>
                 <div className="d-inline-flex align-items-center d-block d-lg-none">
