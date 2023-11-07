@@ -50,7 +50,8 @@ export const loginUser = async (req, res, next)=>{
 
 
         res.cookie("token", token, { expires: new Date(Date.now() + 900000), httpOnly: true, secure:true }).status(200).json({
-            user
+            user,
+            token
         })
 
 
