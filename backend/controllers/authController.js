@@ -60,5 +60,7 @@ export const loginUser = async (req, res, next)=>{
     }
 }
 export const logoutUser = (req, res, next)=>{
-    console.log("from inside logoutUser");
+    res.cookie("token", "", { expires: new Date(Date.now())}).json({
+        message:'Logged out'
+    });
 }

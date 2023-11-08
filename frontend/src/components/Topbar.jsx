@@ -1,12 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLogoutUserMutation } from '../redux/features/auth/authApi';
+import { clearUserInfo } from '../redux/features/auth/authSlice';
+
 
 function Topbar() {
 
     const {user, token} = useSelector(state=>state.auth);
-
-
+    const [logoutUser] = useLogoutUserMutation();
+    const dispatch = useDispatch();
+    const handleLogout = async ()=>{
+        await logoutUser();
+        dispatch(clearUserInfo());
+    }
 
   return (
     <>
@@ -30,7 +37,7 @@ function Topbar() {
                         <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Hi, {user.email}</button>
                         <div className="dropdown-menu dropdown-menu-right">
                             <Link className="dropdown-item" to="/auth/profile">Profile</Link>
-                            <Link className="dropdown-item" to="/auth/login">Logout</Link>
+                            <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                         </div>
                         </>:<>
                         <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
