@@ -7,12 +7,12 @@ import {
     updateProduct,
     deleteProduct
  } from '../controllers/productController.js';
- import { isAuthorizedUser } from '../middleware/authMiddleware.js';
+ import { isAuthenticatedUser, authorizedUser } from '../middleware/authMiddleware.js';
 
 router.route('/products').get(getAllProducts);
 router.route('/product/:id').get(getProductById);
-router.route('/new/product').post(isAuthorizedUser, createNewProduct);
-router.route('/product/update/:id').put(isAuthorizedUser, updateProduct);
-router.route('/product/delete/:id').delete(isAuthorizedUser, deleteProduct);
+router.route('/new/product').post(isAuthenticatedUser, authorizedUser('admin'),  createNewProduct);
+router.route('/product/update/:id').put(isAuthenticatedUser, updateProduct);
+router.route('/product/delete/:id').delete(isAuthenticatedUser, deleteProduct);
 
 export default router;

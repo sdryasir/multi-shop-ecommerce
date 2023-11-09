@@ -1,7 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
+
+
+    const {token} = useSelector(state=>state.auth);
+
   return (
     <>
         <div className="container-fluid bg-dark mb-30">
@@ -55,6 +60,10 @@ function Navbar() {
                                 </div>
                             </div>
                             <Link to="contact" className="nav-item nav-link">Contact</Link>
+                            {
+                                token ? <Link to="/add-product" className="nav-item nav-link">Add Product</Link> : null
+                            }
+                            
                         </div>
                         <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" className="btn px-0">

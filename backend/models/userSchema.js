@@ -21,7 +21,14 @@ const userSchema = new Schema({
         required:[true, 'Please provide the password'],
         trim: true,
     },
-    avatar:{secure_url:String, public_id:String}
+    avatar:{secure_url:String, public_id:String},
+    role:{
+        type:String,
+        default:'user',
+        enum:['user', 'admin', 'editor']
+    }
+},{
+    timestamps:true
 })
 
 

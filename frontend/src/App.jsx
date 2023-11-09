@@ -1,4 +1,5 @@
 import './App.css'
+import RequireAuth from './layouts/RequireAuth'
 import RootLayout from './layouts/Rootlayout'
 import AddProduct from './pages/AddProduct'
 import Cart from './pages/Cart'
@@ -15,6 +16,10 @@ import {
   createRoutesFromElements,
   Route
 } from "react-router-dom";
+import RequireAdminAuth from './layouts/RequireAdminAuth'
+
+
+import { useSelector } from 'react-redux'
 
 
 const router = createBrowserRouter(
@@ -25,15 +30,24 @@ const router = createBrowserRouter(
       <Route path="auth/login" element={<Login/>} />
       <Route path="auth/register" element={<Register/>} />
       <Route path="detail" element={<Detail/>} />
-      <Route path="cart" element={<Cart/>} />
-      <Route path="checkout" element={<Checkout/>} />
+      <Route path="cart" element={<Cart/>} /> 
       <Route path="contact" element={<Contact/>} />
-      <Route path="add-product" element={<AddProduct/>} />
+      
+      <Route element={<RequireAuth/>}>
+        <Route path="checkout" element={<Checkout/>} />
+      </Route>
+      
+      <Route element={<RequireAdminAuth role={'admin'}/>}>
+        <Route path="add-product" element={<AddProduct/>} />
+      </Route>
+
     </Route>
   )
 )
 
 function App() {
+
+  const {user} = useSelector(state=>state.auth)
 
   return (
     <>
