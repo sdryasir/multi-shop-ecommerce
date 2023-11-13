@@ -46,8 +46,9 @@ export const loginUser = async (req, res, next)=>{
         }
 
         //JWT
-        const token = await jwt.sign({ payload: user }, process.env.JWT_SECRET, { expiresIn: 1 * 60 * 60 });
+        const token = await jwt.sign({ payload: user }, process.env.JWT_SECRET, { expiresIn: 10 });
 
+        req.token = token;
 
         res.cookie("token", token, { expires: new Date(Date.now() + 900000), httpOnly: true, secure:true }).status(200).json({
             user,
@@ -63,4 +64,9 @@ export const logoutUser = (req, res, next)=>{
     res.cookie("token", "", { expires: new Date(Date.now())}).json({
         message:'Logged out'
     });
+}
+
+
+export const getToken = (req, res, next)=>{
+    return req.token ? req.token:null
 }

@@ -1,15 +1,19 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 export const isAuthenticatedUser = (req, res, next)=>{
-    //const {token} = req.cookies('token');
-    const token = req.cookies.token;
+        try {
+            const token = req.cookies.token;
 
-    if(!token){
-        return next(new Error('Please login to access this resource'));
+        if(!token){
+            return next(new Error('Please login to access this resource'));
+        }
+        const {payload} = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = payload;
+        next(); 
+    } catch (error) {
+        next(error);
     }
-    const {payload} = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload;
-    next();    
+       
 }
 export const authorizedUser = (...roles)=>{
     return (req, res, next) => {

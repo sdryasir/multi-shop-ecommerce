@@ -22,8 +22,19 @@ export const errorMiddleware = (err, req, res, next)=>{
         error = new Error(message);
     };
 
+    if (err.name === 'JsonWebTokenError') {
+        const message = 'JSON Web Token is invalid, Try again';
+        error = new Error(message);
+    }
+
+    if (err.name === 'TokenExpiredError') {
+        const message = 'JSON Web Token is Expired, Try again';
+        error = new Error(message);
+    }
 
     res.json({
-        error: error.message
+        success:false,
+        error: error.message,
+        errorName: err.name === 'TokenExpiredError' ? err.name:null
     })
 }
