@@ -2,11 +2,16 @@ import React from 'react'
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
 import { useRegisterUserMutation } from '../redux/features/auth/authApi';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
 
 
     const [registerUser, {isLoading, error, data}] = useRegisterUserMutation();
+
+    
+    
 
 
     const {handleSubmit, handleChange, handleBlur, errors, values, touched, setFieldValue} = useFormik({
@@ -27,8 +32,15 @@ function Register() {
         onSubmit: async values => {
             delete values.cPassword;
             console.log(values);
-            await registerUser(values).unwrap();
-            // addProduct(values).unwrap();
+            const r = await registerUser(values).unwrap();
+
+            console.log("details", r.data);
+
+            // if(!r.success){
+            //     toast.error(r.error);
+            // }else{
+            //     toast.success('Account is created successfully');
+            // }
         },
       });
 
@@ -47,7 +59,7 @@ function Register() {
                             <p className="help-block text-danger">{errors.fullName && touched.fullName ? errors.fullName : null}</p>
                         </div>
                         <div className="control-group">
-                            <input type="text" onChange={handleChange} onBlur={handleBlur} name='userName' className="form-control" id="name" placeholder="Your Username"
+                            <input type="text" onChange={handleChange} onBlur={handleBlur} name='userName' className="form-control" id="username" placeholder="Your Username"
                                 required="required" data-validation-required-message="Please enter your name" />
                             <p className="help-block text-danger">{errors.userName && touched.userName ? errors.userName : null}</p>
                         </div>
@@ -70,6 +82,7 @@ function Register() {
                             <button className="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Create Account</button>
                         </div>
                     </form>
+                    <ToastContainer/>
                 </div>
             </div>
             <div className="col-lg-5 mb-5">

@@ -46,7 +46,7 @@ export const loginUser = async (req, res, next)=>{
         }
 
         //JWT
-        const token = await jwt.sign({ payload: user }, process.env.JWT_SECRET, { expiresIn: 10 });
+        const token = await jwt.sign({ payload: user }, process.env.JWT_SECRET, { expiresIn: "10h" });
 
         req.token = token;
 
@@ -66,7 +66,3 @@ export const logoutUser = (req, res, next)=>{
     });
 }
 
-
-export const getToken = (req, res, next)=>{
-    return req.token ? req.token:null
-}

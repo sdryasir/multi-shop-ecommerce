@@ -17,9 +17,12 @@ import {
   Route
 } from "react-router-dom";
 import RequireAdminAuth from './layouts/RequireAdminAuth'
+import { jwtDecode } from "jwt-decode";
 
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { clearUserInfo } from './redux/features/auth/authSlice'
 
 
 const router = createBrowserRouter(
@@ -47,7 +50,25 @@ const router = createBrowserRouter(
 
 function App() {
 
-  const {user} = useSelector(state=>state.auth)
+  const {user,token} = useSelector(state=>state.auth);
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    if(token){
+      const {exp} = jwtDecode(token);
+      const checkTokenValidity = () => {
+        if(exp<Date.now()/1000){
+          alert("Your session has Expired, Please login again to continue using APP")
+          dispatch(clearUserInfo());
+        }
+      };
+      const interval = setInterval(checkTokenValidity, 3000);
+      return () => clearInterval(interval);
+    }
+  },[token])
+
+
 
   return (
     <>
