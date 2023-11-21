@@ -14,7 +14,7 @@ cloudinaryConfig();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:5173'}));
 app.use('/api', prodctRoutes, authRoutes)
 
 app.use(errorMiddleware)

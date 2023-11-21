@@ -29,7 +29,9 @@ export const createNewProduct = async function(req, res, next){
         console.log(newProduct);
 
         res.json({
-            newProduct
+            newProduct,
+            success:true,
+            message:"Product has been created"
         })
     } catch (error) {
         next(error);

@@ -1,10 +1,9 @@
 import React from 'react'
-import Topbar from '../components/Topbar'
-import Navbar from '../components/Navbar'
 import Breadcrumb from '../components/Breadcrumb'
-import Footer from '../components/Footer'
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
+ import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useAddNewProductMutation } from '../redux/features/product/productApi'
 
 function AddProduct() {
@@ -32,6 +31,11 @@ function AddProduct() {
         onSubmit: async (values) => {
             const res = await addProduct(values).unwrap();
             console.log(res)
+            if (res.success) {
+                toast.success(res.message);
+            } else {
+                toast.error(res.message);
+            }
         },
       });
     
@@ -96,7 +100,7 @@ function AddProduct() {
                    
                 </div>
                 <div className="bg-light p-30 mb-3">
-                    
+                <ToastContainer />  
                 </div>
             </div>
         </div>
