@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const isAuthenticatedUser = (req, res, next)=>{
         try {
             const token = req.cookies.token;
-
+            console.log(token);
         if(!token){
             return next(new Error('Please login to access this resource'));
         }

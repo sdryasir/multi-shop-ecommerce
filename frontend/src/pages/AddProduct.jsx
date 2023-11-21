@@ -25,12 +25,13 @@ function AddProduct() {
             title: Yup.string().max(30, 'Must be 30 characters or less').required('Required'),
             description: Yup.string().max(2000, 'Must be 2000 characters or less').required('Required'),
             category: Yup.string().required('Required'),
-            image: Yup.string().required('Required'),
+            image: Yup.string(),
             price: Yup.number().required('Required'),
             discount: Yup.number().required('Required'),
         }),
-        onSubmit: values => {
-            addProduct(values).unwrap();
+        onSubmit: async (values) => {
+            const res = await addProduct(values).unwrap();
+            console.log(res)
         },
       });
     

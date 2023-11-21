@@ -16,7 +16,8 @@ export const registerNewUser = async (req, res, next)=>{
         const user = await User.create(newUser);
         res.json({
             user,
-            message:"User has been registered"
+            message:"User has been registered",
+            success:true
         })
     } catch (error) {
         next(error);
@@ -50,7 +51,7 @@ export const loginUser = async (req, res, next)=>{
 
         req.token = token;
 
-        res.cookie("token", token, { expires: new Date(Date.now() + 900000), httpOnly: true, secure:true }).status(200).json({
+        res.cookie("token", token, { expires: new Date(Date.now() + 900000), httpOnly: true, secure:true, SameSite: "None" }).status(200).json({
             user,
             token
         })

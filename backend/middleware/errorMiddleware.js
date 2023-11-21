@@ -34,7 +34,6 @@ export const errorMiddleware = (err, req, res, next)=>{
 
     res.json({
         success:false,
-        error: error.message,
-        errorName: err.name === 'TokenExpiredError' ? err.name:null
+        message: error.message,
     })
 }
